@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>719192431708-huiuo1a89iasmudpn4chbn1amm4krh47.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.719192431708-huiuo1a89iasmudpn4chbn1amm4krh47</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>719192431708-a1v1r2p3kefl0nmos59ck4su2c3agrtq.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDl2kG6-TT0YbdEvj7D9SB4DOufMFjmcvA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>719192431708</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.islamifyAdmin</string>
+	<key>PROJECT_ID</key>
+	<string>islamify-1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>islamify-1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:719192431708:ios:8f584ba0208b90835ada99</string>
+</dict>
+</plist>

@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "719192431708",
+    "project_id": "islamify-1",
+    "storage_bucket": "islamify-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719192431708:android:a9562852f7e5df1e5ada99",
+        "android_client_info": {
+          "package_name": "com.example.islamify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719192431708-a1v1r2p3kefl0nmos59ck4su2c3agrtq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.islamify",
+            "certificate_hash": "a0ad945657ca53b94d7d9a1be2efd04c3bcdb556"
+          }
+        },
+        {
+          "client_id": "719192431708-g7q9mavjp4hs8f6geskv5diu9cu2or83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKlCo2vX7vlxmr3X0-Dq03jF8jBVU-Rm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719192431708-g7q9mavjp4hs8f6geskv5diu9cu2or83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "719192431708-695cnttb0vtkc175ns7crfn13gp3jb32.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.islamicPrimer"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719192431708:android:5f15869a94fce5bd5ada99",
+        "android_client_info": {
+          "package_name": "com.example.islamify_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719192431708-g7q9mavjp4hs8f6geskv5diu9cu2or83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKlCo2vX7vlxmr3X0-Dq03jF8jBVU-Rm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719192431708-g7q9mavjp4hs8f6geskv5diu9cu2or83.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "719192431708-695cnttb0vtkc175ns7crfn13gp3jb32.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.islamicPrimer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
