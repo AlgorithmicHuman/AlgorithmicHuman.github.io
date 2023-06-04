@@ -21,8 +21,47 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
     _imageController.dispose();
   }
 
+  void nextPage() {
+    final isValid = _form.currentState!.validate();
+
+    if (!isValid) {
+      return;
+    }
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => CourseChaptersScreen(
+          courseTitle: _courseTitleController.text,
+          imageUrl: _imageController.text,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget imageValidation = Image.network(
+      _imageController.text,
+      fit: BoxFit.cover,
+      errorBuilder:
+          (BuildContext context, Object exception, StackTrace? stackTrace) {
+        return Container(
+          color: Colors.red,
+          child: Center(
+            child: Text(
+              'Failed to load image: $exception',
+              style: const TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      },
+    );
+
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -42,6 +81,7 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Card(
+                        surfaceTintColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -73,12 +113,21 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
                             ),
                           ),
                           onChanged: (str) => setState(() {}),
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.trim().length < 4) {
+                              return 'Course title should least be 4 characters long.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       const SizedBox(
                         height: 25,
                       ),
                       Card(
+                        surfaceTintColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -111,6 +160,14 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
                             ),
                           ),
                           onFieldSubmitted: (str) => setState(() {}),
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.trim().length < 5) {
+                              return 'Please provide a valid Image url';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       const SizedBox(
@@ -124,14 +181,7 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
                               Icons.arrow_forward,
                               size: 25,
                             ),
-                            onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (ctx) => CourseChaptersScreen(
-                                  courseTitle: _courseTitleController.text,
-                                  imageUrl: _imageController.text,
-                                ),
-                              ),
-                            ),
+                            onPressed: () => nextPage(),
                             label: const Text(
                               'Next',
                               style: TextStyle(
@@ -178,27 +228,7 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
                                   ),
                                 ),
                               )
-                            : Image.network(
-                                _imageController.text,
-                                fit: BoxFit.cover,
-                                errorBuilder: (BuildContext context,
-                                    Object exception, StackTrace? stackTrace) {
-                                  return Container(
-                                    color: Colors.red,
-                                    child: Center(
-                                      child: Text(
-                                        'Failed to load image: $exception',
-                                        style: const TextStyle(
-                                          fontSize: 35,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
+                            : imageValidation,
                         Positioned(
                           left: 0,
                           right: 0,

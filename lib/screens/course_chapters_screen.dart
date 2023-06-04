@@ -70,6 +70,23 @@ class _CourseChaptersScreenState extends State<CourseChaptersScreen> {
     super.dispose();
   }
 
+  void nextPage(int index) {
+    final isValid = _form.currentState!.validate();
+
+    if (!isValid) {
+      return;
+    }
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => ChapterContentScreen(
+          chapterTitle: controllers[index].text,
+          courseTitle: widget.courseTitle,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -89,6 +106,7 @@ class _CourseChaptersScreenState extends State<CourseChaptersScreen> {
                         children: [
                           Expanded(
                             child: Card(
+                              surfaceTintColor: Colors.white,
                               margin: const EdgeInsets.all(15),
                               elevation: 15,
                               child: TextFormField(
@@ -120,18 +138,19 @@ class _CourseChaptersScreenState extends State<CourseChaptersScreen> {
                                   ),
                                 ),
                                 onChanged: (value) => setState(() {}),
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      value.trim().length < 5) {
+                                    return 'Chapter name should least be 5 characters long.';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
                           TextButton.icon(
-                            onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (ctx) => ChapterContentScreen(
-                                  chapterTitle: controllers[i].text,
-                                  courseTitle: widget.courseTitle,
-                                ),
-                              ),
-                            ),
+                            onPressed: () => nextPage(i),
                             icon: const Icon(
                               Icons.arrow_outward_sharp,
                               size: 25,

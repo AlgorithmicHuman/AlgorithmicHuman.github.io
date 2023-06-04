@@ -15,6 +15,8 @@ class ChapterContentScreen extends StatefulWidget {
 }
 
 class _ChapterContentScreenState extends State<ChapterContentScreen> {
+  final form = GlobalKey<FormState>();
+
   List<TextEditingController> controllers = [];
   List<String> cardContents = [];
   String selectedCard = '';
@@ -88,88 +90,97 @@ class _ChapterContentScreenState extends State<ChapterContentScreen> {
             flex: 2,
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    for (var i = 0; i < controllers.length; i++)
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Card(
-                              margin: const EdgeInsets.all(15),
-                              elevation: 15,
-                              child: TextFormField(
-                                controller: controllers[i],
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                decoration: InputDecoration(
-                                  prefixIcon: const Padding(
-                                    padding: EdgeInsets.all(15),
-                                    child: Icon(Icons.abc),
+              child: Form(
+                key: form,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      for (var i = 0; i < controllers.length; i++)
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Card(
+                                margin: const EdgeInsets.all(15),
+                                elevation: 15,
+                                child: TextFormField(
+                                  controller: controllers[i],
+                                  textCapitalization:
+                                      TextCapitalization.sentences,
+                                  decoration: InputDecoration(
+                                    prefixIcon: const Padding(
+                                      padding: EdgeInsets.all(15),
+                                      child: Icon(Icons.abc),
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 20,
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide:
+                                          const BorderSide(color: Colors.white),
+                                    ),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    hintText: 'Card ${i + 1}',
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[600],
+                                    ),
                                   ),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 20,
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide:
-                                        const BorderSide(color: Colors.white),
-                                  ),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  hintText: 'Card ${i + 1}',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                  ),
+                                  maxLines: null,
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (enteredText) {
+                                    selectCard(enteredText);
+                                    setState(() {
+                                      cardContents[i] = enteredText;
+                                    });
+                                  },
+                                  onTap: () => selectCard(controllers[i].text),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please provide some text to be included in the card.';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                                maxLines: null,
-                                keyboardType: TextInputType.multiline,
-                                onChanged: (enteredText) {
-                                  selectCard(enteredText);
-                                  setState(() {
-                                    cardContents[i] = enteredText;
-                                  });
-                                },
-                                onTap: () => selectCard(controllers[i].text),
                               ),
                             ),
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.delete,
-                              color: Colors.red[700],
-                              size: 28,
+                            IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.red[700],
+                                size: 28,
+                              ),
+                              onPressed: () => deleteTextField(
+                                i,
+                                controllers[i].text.isEmpty
+                                    ? 'Do you want to delete this Card?'
+                                    : 'Do you want to delete the Card \'${controllers[i].text}\'',
+                              ),
                             ),
-                            onPressed: () => deleteTextField(
-                              i,
-                              controllers[i].text.isEmpty
-                                  ? 'Do you want to delete this Card?'
-                                  : 'Do you want to delete the Card \'${controllers[i].text}\'',
-                            ),
+                          ],
+                        ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextButton.icon(
+                        icon: const Icon(
+                          Icons.add,
+                          size: 25,
+                        ),
+                        onPressed: addTextField,
+                        label: const Text(
+                          'Add Card',
+                          style: TextStyle(
+                            fontSize: 22,
                           ),
-                        ],
-                      ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextButton.icon(
-                      icon: const Icon(
-                        Icons.add,
-                        size: 25,
-                      ),
-                      onPressed: addTextField,
-                      label: const Text(
-                        'Add Card',
-                        style: TextStyle(
-                          fontSize: 22,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
