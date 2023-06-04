@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:islamify_admin/course_chapters.dart';
+import 'package:islamify_admin/screens/course_chapters_screen.dart';
 
-class CourseCreation extends StatefulWidget {
-  const CourseCreation({super.key});
+class CourseCreationScreen extends StatefulWidget {
+  const CourseCreationScreen({super.key});
 
   @override
-  State<CourseCreation> createState() => _CourseCreationState();
+  State<CourseCreationScreen> createState() => _CourseCreationScreenState();
 }
 
-class _CourseCreationState extends State<CourseCreation> {
+class _CourseCreationScreenState extends State<CourseCreationScreen> {
   final _form = GlobalKey<FormState>();
 
   final _courseTitleController = TextEditingController();
@@ -23,7 +23,7 @@ class _CourseCreationState extends State<CourseCreation> {
 
   @override
   Widget build(BuildContext context) {
-    final _screenHeight = MediaQuery.of(context).size.height;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Row(
@@ -72,9 +72,7 @@ class _CourseCreationState extends State<CourseCreation> {
                               color: Colors.grey[600],
                             ),
                           ),
-                          onFieldSubmitted: (str) => setState(() {
-                            // _imageController.text;
-                          }),
+                          onChanged: (str) => setState(() {}),
                         ),
                       ),
                       const SizedBox(
@@ -128,7 +126,7 @@ class _CourseCreationState extends State<CourseCreation> {
                             ),
                             onPressed: () => Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (ctx) => CourseChapters(
+                                builder: (ctx) => CourseChaptersScreen(
                                   courseTitle: _courseTitleController.text,
                                   imageUrl: _imageController.text,
                                 ),
@@ -157,7 +155,7 @@ class _CourseCreationState extends State<CourseCreation> {
                 vertical: 180,
               ),
               child: SizedBox(
-                height: _screenHeight,
+                height: screenHeight,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Card(
@@ -183,6 +181,23 @@ class _CourseCreationState extends State<CourseCreation> {
                             : Image.network(
                                 _imageController.text,
                                 fit: BoxFit.cover,
+                                errorBuilder: (BuildContext context,
+                                    Object exception, StackTrace? stackTrace) {
+                                  return Container(
+                                    color: Colors.red,
+                                    child: Center(
+                                      child: Text(
+                                        'Failed to load image: $exception',
+                                        style: const TextStyle(
+                                          fontSize: 35,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                         Positioned(
                           left: 0,

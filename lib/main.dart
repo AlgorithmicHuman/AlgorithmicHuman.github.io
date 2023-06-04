@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islamify_admin/course_creation.dart';
+import 'package:islamify_admin/screens/course_creation_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.openSansTextTheme(),
         useMaterial3: true,
       ),
-      home: const CourseCreation(),
+      home: const CourseCreationScreen(),
     );
   }
 }

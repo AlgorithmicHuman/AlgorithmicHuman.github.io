@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:islamify_admin/widgets/styled_field.dart';
+import 'package:islamify_admin/screens/chapter_content_screen.dart';
 
-class CourseChapters extends StatefulWidget {
-  CourseChapters({
+class CourseChaptersScreen extends StatefulWidget {
+  CourseChaptersScreen({
     super.key,
     required this.courseTitle,
     required this.imageUrl,
   });
 
-  String courseTitle;
-  String imageUrl;
+  final String courseTitle;
+  final String imageUrl;
 
   @override
-  State<CourseChapters> createState() => _CourseChaptersState();
+  State<CourseChaptersScreen> createState() => _CourseChaptersScreenState();
 }
 
-class _CourseChaptersState extends State<CourseChapters> {
+class _CourseChaptersScreenState extends State<CourseChaptersScreen> {
   final _form = GlobalKey<FormState>();
 
   List<TextEditingController> controllers = [];
@@ -72,9 +72,7 @@ class _CourseChaptersState extends State<CourseChapters> {
 
   @override
   Widget build(BuildContext context) {
-    final _screenHeight = MediaQuery.of(context).size.height;
-
-    final _chapterController = TextEditingController();
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Row(
@@ -90,15 +88,50 @@ class _CourseChaptersState extends State<CourseChapters> {
                       Row(
                         children: [
                           Expanded(
-                            child: StyledField(
-                              controller: controllers[i],
-                              hintText: 'Chapter ${i + 1}',
-                              icon: const Icon(Icons.abc),
-                              onSubmit: (value) => setState(() {}),
+                            child: Card(
+                              margin: const EdgeInsets.all(15),
+                              elevation: 15,
+                              child: TextFormField(
+                                controller: controllers[i],
+                                textCapitalization:
+                                    TextCapitalization.sentences,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Padding(
+                                    padding: EdgeInsets.all(15),
+                                    child: Icon(Icons.abc),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 20,
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide:
+                                        const BorderSide(color: Colors.white),
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  hintText: 'Chapter ${i + 1}',
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                                onChanged: (value) => setState(() {}),
+                              ),
                             ),
                           ),
                           TextButton.icon(
-                            onPressed: () {},
+                            onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (ctx) => ChapterContentScreen(
+                                  chapterTitle: controllers[i].text,
+                                  courseTitle: widget.courseTitle,
+                                ),
+                              ),
+                            ),
                             icon: const Icon(
                               Icons.arrow_outward_sharp,
                               size: 25,
@@ -149,7 +182,7 @@ class _CourseChaptersState extends State<CourseChapters> {
           Expanded(
             flex: 1,
             child: SizedBox(
-              height: _screenHeight,
+              height: screenHeight,
               width: 20,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
