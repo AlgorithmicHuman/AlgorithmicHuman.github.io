@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:islamify_admin/course_chapters.dart';
 
-class CourseForm extends StatefulWidget {
-  const CourseForm({super.key});
+class CourseCreation extends StatefulWidget {
+  const CourseCreation({super.key});
 
   @override
-  State<CourseForm> createState() => _CourseFormState();
+  State<CourseCreation> createState() => _CourseCreationState();
 }
 
-class _CourseFormState extends State<CourseForm> {
+class _CourseCreationState extends State<CourseCreation> {
   final _form = GlobalKey<FormState>();
 
   final _courseTitleController = TextEditingController();
@@ -111,9 +112,7 @@ class _CourseFormState extends State<CourseForm> {
                               color: Colors.grey[600],
                             ),
                           ),
-                          onFieldSubmitted: (str) => setState(() {
-                            // _imageController.text;
-                          }),
+                          onFieldSubmitted: (str) => setState(() {}),
                         ),
                       ),
                       const SizedBox(
@@ -127,7 +126,14 @@ class _CourseFormState extends State<CourseForm> {
                               Icons.arrow_forward,
                               size: 25,
                             ),
-                            onPressed: () {},
+                            onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (ctx) => CourseChapters(
+                                  courseTitle: _courseTitleController.text,
+                                  imageUrl: _imageController.text,
+                                ),
+                              ),
+                            ),
                             label: const Text(
                               'Next',
                               style: TextStyle(
@@ -147,8 +153,8 @@ class _CourseFormState extends State<CourseForm> {
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: 100,
-                vertical: 200,
+                horizontal: 80,
+                vertical: 180,
               ),
               child: SizedBox(
                 height: _screenHeight,
@@ -160,12 +166,15 @@ class _CourseFormState extends State<CourseForm> {
                       fit: StackFit.expand,
                       children: [
                         _imageController.text.isEmpty
-                            ? const SizedBox.expand(
-                                child: Center(
+                            ? Container(
+                                color: Colors.blueAccent[100],
+                                child: const Center(
                                   child: Text(
                                     'Provide an image url to see it here!',
                                     style: TextStyle(
                                       fontSize: 35,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
