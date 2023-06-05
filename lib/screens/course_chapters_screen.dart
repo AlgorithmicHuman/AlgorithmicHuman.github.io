@@ -90,8 +90,11 @@ class _CourseChaptersScreenState extends State<CourseChaptersScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Chapters for the course \'${widget.courseTitle}\''),
+      ),
       body: Row(
         children: [
           Expanded(
@@ -209,7 +212,7 @@ class _CourseChaptersScreenState extends State<CourseChaptersScreen> {
                   color: Colors.blueAccent[100],
                   margin: const EdgeInsets.symmetric(
                     horizontal: 50,
-                    vertical: 100,
+                    vertical: 60,
                   ),
                   elevation: 15,
                   child: Padding(

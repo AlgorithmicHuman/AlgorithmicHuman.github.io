@@ -13,6 +13,7 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
 
   final _courseTitleController = TextEditingController();
   final _imageController = TextEditingController();
+  bool _isValidUrl = true;
 
   @override
   void dispose() {
@@ -45,6 +46,7 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
       fit: BoxFit.cover,
       errorBuilder:
           (BuildContext context, Object exception, StackTrace? stackTrace) {
+        _isValidUrl = false;
         return Container(
           color: Colors.red,
           child: Center(
@@ -117,7 +119,7 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
                             if (value == null ||
                                 value.isEmpty ||
                                 value.trim().length < 4) {
-                              return 'Course title should least be 4 characters long.';
+                              return 'Course title should atleast be 4 characters long.';
                             }
                             return null;
                           },
@@ -159,11 +161,13 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
                               color: Colors.grey[600],
                             ),
                           ),
-                          onFieldSubmitted: (str) => setState(() {}),
+                          onChanged: (str) => setState(() {}),
+                          onFieldSubmitted: (str) => nextPage(),
                           validator: (value) {
                             if (value == null ||
                                 value.isEmpty ||
-                                value.trim().length < 5) {
+                                value.trim().length < 5 ||
+                                !_isValidUrl) {
                               return 'Please provide a valid Image url';
                             }
                             return null;
@@ -213,22 +217,23 @@ class _CourseCreationScreenState extends State<CourseCreationScreen> {
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
-                        _imageController.text.isEmpty
-                            ? Container(
-                                color: Colors.blueAccent[100],
-                                child: const Center(
-                                  child: Text(
-                                    'Provide an image url to see it here!',
-                                    style: TextStyle(
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
+                        if (_imageController.text.isEmpty)
+                          Container(
+                            color: Colors.blueAccent[100],
+                            child: const Center(
+                              child: Text(
+                                'Provide an image url to see it here!',
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
                                 ),
-                              )
-                            : imageValidation,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          )
+                        else
+                          imageValidation,
                         Positioned(
                           left: 0,
                           right: 0,

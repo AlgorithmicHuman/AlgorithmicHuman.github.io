@@ -84,6 +84,10 @@ class _ChapterContentScreenState extends State<ChapterContentScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Cards for the chapter \'${widget.chapterTitle}\''),
+      ),
       body: Row(
         children: [
           Expanded(
@@ -190,7 +194,7 @@ class _ChapterContentScreenState extends State<ChapterContentScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 80,
-                vertical: 180,
+                vertical: 140,
               ),
               child: SizedBox(
                 height: screenHeight,
