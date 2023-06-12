@@ -4,12 +4,7 @@ import 'package:islamify_admin/screens/chapter_content_screen.dart';
 class CourseChaptersScreen extends StatefulWidget {
   CourseChaptersScreen({
     super.key,
-    required this.courseTitle,
-    required this.imageUrl,
   });
-
-  final String courseTitle;
-  final String imageUrl;
 
   @override
   State<CourseChaptersScreen> createState() => _CourseChaptersScreenState();
@@ -76,25 +71,23 @@ class _CourseChaptersScreenState extends State<CourseChaptersScreen> {
     if (!isValid) {
       return;
     }
-
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) => ChapterContentScreen(
-          chapterTitle: controllers[index].text,
-          courseTitle: widget.courseTitle,
-        ),
-      ),
-    );
   }
+
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (ctx) => ChapterContentScreen(
+  //         chapterTitle: controllers[index].text,
+  //         courseTitle: widget.courseTitle,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Chapters for the course \'${widget.courseTitle}\''),
-      ),
+      appBar: AppBar(),
       body: Row(
         children: [
           Expanded(

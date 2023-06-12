@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islamify_admin/screens/course_creation_screen.dart';
+import 'package:islamify_admin/screens/course.dart';
 
 void main() {
   runApp(const MyApp());
